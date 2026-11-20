@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portada</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:#00FFFF;
+/* Fondo neón oscuro como el del menú */
+background: #050510;
+background-image: radial-gradient(circle at 20% 20%, #220033 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, #003333 0%, transparent 40%);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.card{
+background: rgba(0,0,0,0.6);
+padding:35px;
+border-radius:20px;
+/* Borde neón */
+border: 3px solid #00FFFF;
+box-shadow: 0 0 10px #00FFFF, 0 0 25px #00FFFF, 0 0 50px #FF00FF, inset 0 0 15px #00FFFF;
+max-width:500px;
+width:90%;
+}
+img.perfil{
+width:160px;
+height:160px;
+border-radius:50%;
+object-fit:cover;
+/* Borde neón en tu foto */
+border:5px solid #FF00FF;
+box-shadow: 0 0 15px #FF00FF, 0 0 30px #FF00FF, 0 0 50px #00FFFF;
+}
+h1{
+margin:15px 0 5px 0;
+color:#00FFFF;
+font-size: 32px;
+text-shadow: 0 0 5px #00FFFF, 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+}
+h2{
+margin:0;
+color:#FF00FF;
+font-weight:bold;
+font-size:18px;
+text-shadow: 0 0 5px #FF00FF, 0 0 15px #FF00FF;
+}
+.datos{
+margin-top:20px;
+text-align:left;
+background: rgba(255,255,255,0.05);
+padding:15px;
+border-radius:12px;
+color:#fff;
+border: 1px solid #39FF14;
+box-shadow: 0 0 10px #39FF14, inset 0 0 10px #39FF1433;
+}
+.datos p{margin:8px 0}
+.datos b{
+color:#39FF14;
+text-shadow: 0 0 5px #39FF14;
+}
+.badge{
+display:inline-block;
+background: transparent;
+color:#FFFF00;
+padding:8px 15px;
+border-radius:20px;
+margin-top:15px;
+font-weight:bold;
+border: 2px solid #FFFF00;
+text-shadow: 0 0 5px #FFFF00, 0 0 15px #FFFF00;
+box-shadow: 0 0 10px #FFFF00, 0 0 25px #FFFF00;
+}
+p{
+color:#00FFAA;
+text-shadow: 0 0 5px #00FFAA;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<img class="perfil" src="IMG_20261120_081902891.jpg" alt="Foto de perfil">
+<h1>Mi Proyecto Web</h1>
+<h2>Frameset - PARTE3</h2>
+
+<div class="datos">
+<p><b>Nombre:</b> Juan Manuel Angulo Perez</p>
+<p><b>Escuela:</b> CECyTE06</p>
+<p><b>Materia:</b> M4S1</p>
+<p><b>Profesor:</b> Camelia</p>
+<p><b>Grupo:</b> 5D</p>
+<p><b>Fecha:</b> Noviembre 2025</p>
+</div>
+
+<div class="badge">✨ Bienvenidos a mi sitio ✨</div>
+<p>Selecciona una opción del menú de la izquierda</p>
+</div>
+
+</body>
+</html>

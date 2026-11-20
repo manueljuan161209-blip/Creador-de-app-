@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>INSECTO ROBOT APP</title>
+<style>
+body{margin:0;background:#1a1a2e;color:white;font-family:Arial;text-align:center;touch-action:none}
+header{background:#00f5a0;color:#000;padding:15px;font-size:22px;font-weight:bold;position:sticky;top:0;z-index:10}
+#arena{width:95%;height:300px;background:#16213e;border:3px solid #00f5a0;border-radius:15px;margin:10px auto;position:relative;overflow:hidden}
+#insecto{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:.2s;width:70px;height:70px}
+.cuerpo{width:38px;height:55px;background:linear-gradient(#333,#111);border-radius:50%;border:2px solid #00f5a0;margin:0 auto;position:relative;z-index:2}
+.ojo{width:8px;height:8px;background:#00f5a0;border-radius:50%;display:inline-block;margin:3px;box-shadow:0 0 8px #00f5a0}
+.antena{width:2px;height:18px;background:#00f5a0;position:absolute;top:-16px;transform-origin:bottom}
+.antena.izq{left:7px;transform:rotate(-20deg)}.antena.der{right:7px;transform:rotate(20deg)}
+.pata{position:absolute;width:22px;height:3px;background:#777;border:1px solid #00f5a0}
+.i1{top:8px;left:-18px;transform:rotate(-30deg)}.i2{top:22px;left:-20px}.i3{top:36px;left:-18px;transform:rotate(30deg)}
+.d1{top:8px;right:-18px;transform:rotate(30deg)}.d2{top:22px;right:-20px}.d3{top:36px;right:-18px;transform:rotate(-30deg)}
+.saludando .antena.der{animation:saludo .3s infinite alternate}
+@keyframes saludo{from{transform:rotate(20deg)}to{transform:rotate(70deg)}}
+/* CONTROLES TIPO CELULAR */
+#controles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:90%;max-width:300px;margin:15px auto}
+.btn{padding:25px 0;font-size:24px;background:#0f3460;border:2px solid #00f5a0;color:#00f5a0;border-radius:15px;user-select:none;-webkit-user-select:none}
+.btn:active{background:#00f5a0;color:#000}
+.btn-saludar{grid-column:1/4;background:#e94560!important;border-color:#e94560!important;color:white!important;font-size:18px!important;padding:15px!important}
+.card{background:#16213e;border:2px solid #00f5a0;border-radius:15px;padding:15px;margin:15px 10px;text-align:left}
+.card h2{color:#00f5a0;text-align:center;margin:5px 0}
+.img-box{width:100%;background:#0f3460;border-radius:10px;padding:8px;margin:8px 0}
+.img-box img{width:100%;height:180px;object-fit:cover;border-radius:8px;background:#000}
+audio{width:100%} input{width:100%;margin:5px 0}
+</style>
+</head>
+<body>
+<header>🎙️ PODCAST DEL INSECTO ROBOT</header>
+
+<div id="arena"><div id="insecto"><div class="antena izq"></div><div class="antena der"></div><div class="pata i1"></div><div class="pata i2"></div><div class="pata i3"></div><div class="pata d1"></div><div class="pata d2"></div><div class="pata d3"></div><div class="cuerpo"><div class="ojo"></div><div class="ojo"></div></div></div></div>
+
+<div id="controles">
+<div></div><button class="btn" ontouchstart="mover('arriba')" onclick="mover('arriba')">↑</button><div></div>
+<button class="btn" ontouchstart="mover('izquierda')" onclick="mover('izquierda')">←</button>
+<button class="btn" ontouchstart="mover('abajo')" onclick="mover('abajo')">↓</button>
+<button class="btn" ontouchstart="mover('derecha')" onclick="mover('derecha')">→</button>
+<button class="btn btn-saludar" onclick="saludar()">👋 SALUDAR</button>
+</div>
+
+<div class="card">
+<h2>📸 2 Imágenes del Robot</h2>
+<div class="img-box"><p>IMAGEN 1 - De tu galería</p><input type="file" accept="image/*" onchange="cargarImg(this,'img1')"><img id="img1" src="https://via.placeholder.com/400x200/0f3460/00f5a0?text=Toca+para+elegir+foto"></div>
+<div class="img-box"><p>IMAGEN 2 - De tu galería</p><input type="file" accept="image/*" onchange="cargarImg(this,'img2')"><img id="img2" src="https://via.placeholder.com/400x200/0f3460/00f5a0?text=Toca+para+elegir+foto"></div>
+</div>
+
+<div class="card">
+<h2>🎧 Audio de Voz - Podcast</h2>
+<p>1. Graba tu voz aquí mismo:</p>
+<button class="btn btn-saludar" style="padding:10px!important;font-size:16px!important" onclick="grabarAudio()">🎤 Grabar / Parar</button>
+<p id="estadoAudio" style="color:#00f5a0;text-align:center"></p>
+<audio id="player" controls style="margin-top:10px"></audio>
+<p style="margin-top:15px">2. O sube un audio de tu celular:</p>
+<input type="file" accept="audio/*" onchange="cargarAudio(this)">
+</div>
+
+<div class="card">
+<h3 style="color:#00f5a0">🔧 ¿Cómo hacer el robot real?</h3>
+<p style="font-size:13px"><b>Materiales:</b> Arduino Nano, 4 servos SG90, batería, acrílico.<br><b>Pasos:</b> Arma cuerpo de 6 patas, conecta servos a Arduino, programa caminata trípode. Costo $500 MXN aprox.</p>
+</div>
+
+<script>
+let x=50,y=50; const insecto=document.getElementById('insecto');
+function mover(dir){if(dir=='arriba'&&y>15)y-=12; if(dir=='abajo'&&y<85)y+=12; if(dir=='izquierda'&&x>15)x-=12; if(dir=='derecha'&&x<85)x+=12; insecto.style.left=x+'%'; insecto.style.top=y+'%'; if(navigator.vibrate) navigator.vibrate(30);}
+function saludar(){insecto.classList.add('saludando'); if(navigator.vibrate) navigator.vibrate([50,50,100]); setTimeout(()=>insecto.classList.remove('saludando'),2000);}
+function cargarImg(input,id){ const file=input.files[0]; if(file){ document.getElementById(id).src=URL.createObjectURL(file); }}
+function cargarAudio(input){ const file=input.files[0]; if(file){ document.getElementById('player').src=URL.createObjectURL(file); }}
+
+// GRABAR AUDIO EN EL CELULAR
+let mediaRecorder, audioChunks=[];
+async function grabarAudio(){
+if(!mediaRecorder || mediaRecorder.state=='inactive'){
+let stream=await navigator.mediaDevices.getUserMedia({audio:true});
+mediaRecorder=new MediaRecorder(stream); audioChunks=[];
+mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+mediaRecorder.onstop=()=>{ let blob=new Blob(audioChunks,{type:'audio/mp3'}); document.getElementById('player').src=URL.createObjectURL(blob); document.getElementById('estadoAudio').innerText="✅ Audio grabado"; };
+mediaRecorder.start(); document.getElementById('estadoAudio').innerText="🔴 Grabando... toca de nuevo para parar";
+}else{ mediaRecorder.stop(); }
+}
+</script>
+</body>
+</html>

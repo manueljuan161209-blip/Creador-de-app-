@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>PROYECTO CECYTE 06</TITLE>
+<style>
+  body {
+    margin: 0;
+    background: #050510; /* oscuro para que brille el neón */
+    overflow: hidden;
+  }
+  #logo {
+    position: absolute;
+    width: 320px;
+    text-align: center;
+    padding: 15px;
+    font-family: "Wide Latin", Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #00FFFF;
+    border: 3px solid currentColor;
+    border-radius: 15px;
+    background: rgba(0,0,0,0.4);
+    /* Efecto neón */
+    text-shadow: 0 0 5px currentColor, 0 0 15px currentColor, 0 0 30px currentColor;
+    box-shadow: 0 0 10px currentColor, 0 0 25px currentColor, inset 0 0 15px currentColor;
+  }
+  #contador {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-family: monospace;
+  }
+</style>
+</HEAD>
+<BODY>
+
+<div id="contador">Esquinas: 0</div>
+
+<div id="logo">
+  PROYECTO CECYTE 06
+  CONSTRUYE APLICACIONES WEB<br>
+  <span style="font-size:16px;">JUAN MANUEL ANGULO PEREZ 5D</span>
+</div>
+
+<script>
+  const logo = document.getElementById('logo');
+  const contador = document.getElementById('contador');
+
+  let x = 100;
+  let y = 100;
+  let dx = 3;
+  let dy = 3;
+
+  const colores = [
+    '#00FFFF', // cian - tu color original
+    '#FF00FF', // magenta
+    '#39FF14', // verde neón
+    '#FFFF00', // amarillo
+    '#FF00AA', // rosa
+    '#00FFAA', // menta
+    '#FF6600', // naranja
+    '#AA00FF'  // morado
+  ];
+  let colorIndex = 0;
+  let esquinas = 0;
+
+  logo.style.color = colores[0];
+
+  function mover() {
+    const anchoPantalla = window.innerWidth;
+    const altoPantalla = window.innerHeight;
+    const anchoLogo = logo.offsetWidth;
+    const altoLogo = logo.offsetHeight;
+
+    x += dx;
+    y += dy;
+
+    let pegoX = false;
+    let pegoY = false;
+
+    if (x + anchoLogo >= anchoPantalla) {
+      x = anchoPantalla - anchoLogo;
+      dx = -dx;
+      pegoX = true;
+    }
+    if (x <= 0) {
+      x = 0;
+      dx = -dx;
+      pegoX = true;
+    }
+    if (y + altoLogo >= altoPantalla) {
+      y = altoPantalla - altoLogo;
+      dy = -dy;
+      pegoY = true;
+    }
+    if (y <= 0) {
+      y = 0;
+      dy = -dy;
+      pegoY = true;
+    }
+
+    if (pegoX || pegoY) {
+      colorIndex = (colorIndex + 1) % colores.length;
+      logo.style.color = colores[colorIndex];
+    }
+
+    // ¡ESQUINA PERFECTA!
+    if (pegoX && pegoY) {
+      esquinas++;
+      contador.textContent = 'Esquinas: ' + esquinas + ' ¡LE DISTE!';
+      document.body.style.background = colores[colorIndex];
+      setTimeout(() => {
+        document.body.style.background = '#050510';
+      }, 150);
+    }
+
+    logo.style.left = x + 'px';
+    logo.style.top = y + 'px';
+    requestAnimationFrame(mover);
+  }
+
+  mover();
+</script>
+
+</BODY>
+</HTML>

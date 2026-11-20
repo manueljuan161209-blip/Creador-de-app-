@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrera de Motos</title>
+<style>
+    body { font-family: Arial; text-align: center; background: #222; color: white; }
+    #info { font-size: 22px; font-weight: bold; margin: 10px; }
+    #pista {
+        position: relative;
+        width: 90%;
+        height: 320px;
+        margin: 0 auto;
+        border: 4px solid white;
+        overflow: hidden;
+        background-image: url("IMG-20261113-WA0017.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+    .carril { position: absolute; width: 100%; height: 120px; }
+    #carril1 { top: 20px; }
+    #carril2 { top: 170px; }
+    .moto {
+        position: absolute;
+        left: 0;
+        width: 130px;
+        height: 90px;
+        object-fit: cover;
+        transition: left 0.1s linear;
+    }
+    #moto1 { top: 0; }
+    #moto2 { top: 0; }
+    .meta {
+        position: absolute;
+        right: 0; top: 0;
+        width: 20px; height: 100%;
+        background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+    }
+    button { font-size: 20px; padding: 12px 25px; margin: 10px; cursor: pointer; border-radius: 10px; }
+    #btnAcelerar { background: red; color: white; }
+    #btnSiguiente { background: green; color: white; display: none; }
+    #mensaje { font-size: 28px; font-weight: bold; color: yellow; margin: 10px; }
+</style>
+</head>
+<body>
+
+<div id="info">
+    NIVEL: <span id="nivel">1</span> |
+    Victorias Jugador 1: <span id="vict1">0</span> |
+    Victorias Jugador 2: <span id="vict2">0</span>
+</div>
+
+<div id="pista">
+    <div class="meta"></div>
+    <div class="carril" id="carril1">
+        <img src="IMG-20261113-WA0025.jpg" class="moto" id="moto1">
+        <br><b>JUGADOR 1 (TÚ)</b>
+    </div>
+    <div class="carril" id="carril2">
+        <img src="WA_1794587077595.jpeg" class="moto" id="moto2">
+        <br><b>JUGADOR 2 (AUTOMÁTICO)</b>
+    </div>
+</div>
+
+<div id="mensaje"></div>
+
+<button id="btnAcelerar" onclick="acelerar()">🏍️ ACELERAR JUGADOR 1</button><br>
+<button onclick="iniciarCarrera()">▶️ INICIAR CARRERA</button>
+<button id="btnSiguiente" onclick="siguienteNivel()">SIGUIENTE NIVEL ➡️</button>
+
+<script>
+let nivel = 1;
+let vict1 = 0;
+let vict2 = 0;
+let pos1 = 0, pos2 = 0;
+let corriendo = false;
+let intervalo;
+let impulso1 = 0;
+
+function actualizarMarcador() {
+    document.getElementById("nivel").innerText = nivel;
+    document.getElementById("vict1").innerText = vict1;
+    document.getElementById("vict2").innerText = vict2;
+}
+
+function acelerar() {
+    if (corriendo) impulso1 += 3;
+}
+
+function iniciarCarrera() {
+    if (corriendo) return;
+    pos1 = 0; pos2 = 0; impulso1 = 0;
+    corriendo = true;
+    document.getElementById("mensaje").innerText = "";
+    document.getElementById("btnSiguiente").style.display = "none";
+    document.getElementById("moto1").style.left = "0px";
+    document.getElementById("moto2").style.left = "0px";
+    intervalo = setInterval(mover, 100);
+}
+
+function mover() {
+    let vel1, vel2;
+    if (nivel <= 2) {
+        vel1 = 4 + impulso1;
+        vel2 = 9;
+    } else {
+        vel1 = 7 + (nivel * 1.5) + impulso1;
+        vel2 = 8;
+    }
+    pos1 += vel1;
+    pos2 += vel2;
+    document.getElementById("moto1").style.left = pos1 + "px";
+    document.getElementById("moto2").style.left = pos2 + "px";
+    let meta = document.getElementById("pista").offsetWidth - 180;
+    if (pos1 >= meta || pos2 >= meta) {
+        clearInterval(intervalo);
+        corriendo = false;
+        if (pos1 > pos2) {
+            vict1++;
+            document.getElementById("mensaje").innerText = "🏆 ¡GANÓ EL JUGADOR 1!";
+        } else {
+            vict2++;
+            document.getElementById("mensaje").innerText = "🏆 ¡GANÓ EL JUGADOR 2!";
+        }
+        actualizarMarcador();
+        document.getElementById("btnSiguiente").style.display = "inline-block";
+    }
+}
+
+function siguienteNivel() {
+    nivel++;
+    actualizarMarcador();
+    document.getElementById("mensaje").innerText = "Nivel " + nivel + " ¡Listo!";
+    document.getElementById("btnSiguiente").style.display = "none";
+    pos1 = 0; pos2 = 0;
+    document.getElementById("moto1").style.left = "0px";
+    document.getElementById("moto2").style.left = "0px";
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.code === "Space") acelerar();
+});
+actualizarMarcador();
+</script>
+</body>
+</html>

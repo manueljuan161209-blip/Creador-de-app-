@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Centinela</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 20px; font-family: Arial, sans-serif; color: white; text-align: center; background: linear-gradient(135deg, #050505, #0a1120, #121030); }
+h1 { color: #ff7a00; text-shadow: 0 0 15px #ff7a00; }
+h2 { color: #8a5cff; }
+.subtitulo { color: #aab2ff; }
+#puntero-verde { position: fixed; top: 50%; left: 50%; width: 25px; height: 25px; border: 3px solid #ff7a00; border-radius: 50%; background: rgba(255,122,0,0.25); box-shadow: 0 0 10px #ff7a00, 0 0 25px #ff5500; transform: translate(-50%, -50%); pointer-events: none; z-index: 999999; }
+@media (hover: hover) and (pointer: fine) { body, a, button { cursor: none; } }
+.contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+.tarjeta { width: 300px; max-width: 100%; padding: 20px; border: 2px solid #ff7a00; border-radius: 18px; background: rgba(20,20,30,0.85); box-shadow: 0 0 15px rgba(255,122,0,0.25); }
+.robot { width: 150px; margin: 20px auto; position: relative; }
+.antena { width: 5px; height: 25px; margin: auto; background: #888; }
+.bola-antena { width: 16px; height: 16px; margin: auto; border-radius: 50%; background: #ff7a00; box-shadow: 0 0 12px #ff7a00; }
+.cabeza { width: 110px; height: 75px; margin: auto; padding: 15px; border: 4px solid #444; border-radius: 20px; background: #1a1a1a; }
+.ojos { display: flex; justify-content: space-around; }
+.ojo { width: 18px; height: 18px; border-radius: 50%; background: #0088ff; box-shadow: 0 0 10px #0088ff; }
+.boca { width: 45px; height: 5px; margin: 12px auto 0; background: #eee; border-radius: 5px; }
+.brazos { display: flex; justify-content: space-between; position: absolute; top: 105px; left: -15px; right: -15px; }
+.brazo { width: 14px; height: 55px; border-radius: 10px; background: #666; }
+.cuerpo { width: 90px; height: 80px; margin: 8px auto; border: 4px solid #444; border-radius: 15px; background: #252525; }
+.panel { width: 45px; height: 30px; margin: 20px auto; border-radius: 5px; background: #ff7a00; box-shadow: 0 0 10px #ff7a00; }
+.piernas { display: flex; justify-content: center; gap: 20px; }
+.pierna { width: 20px; height: 35px; border-radius: 8px; background: #666; }
+.robot-morado .bola-antena { background: #a855f7; box-shadow: 0 0 12px #a855f7; }
+.robot-morado .cabeza { background: #3b1a6e; border-color: #a855f7; }
+.robot-morado .cuerpo { background: #4c1d95; border-color: #a855f7; }
+.robot-morado .ojo { background: #c084fc; box-shadow: 0 0 12px #a855f7; }
+.robot-morado .panel { background: #a855f7; box-shadow: 0 0 10px #a855f7; }
+.robot-morado .brazo, .robot-morado .pierna, .robot-morado .antena { background: #7e22ce; }
+.robot-morado .boca { background: #e9d5ff; }
+.sensor { margin: 15px 0; padding: 10px; border-radius: 10px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,122,0,0.3); }
+.estado { min-height: 22px; font-weight: bold; color: #ff7a00; }
+button { padding: 12px 18px; border: none; border-radius: 10px; color: white; background: linear-gradient(135deg, #ff7a00, #ff4400); font-weight: bold; font-size: 15px; margin: 8px; box-shadow: 0 0 10px rgba(255,122,0,0.5); }
+.lista-enlaces { margin: 30px auto; padding: 20px; max-width: 600px; border: 2px solid #8a5cff; border-radius: 15px; background: rgba(10,10,20,0.8); }
+.lista-enlaces a { display: block; margin: 14px; padding: 10px; color: #60a5ff; text-decoration: none; border: 1px solid rgba(138,92,255,0.3); border-radius: 10px; transition: 0.3s; }
+.lista-enlaces a:hover { color: #ff7a00; border-color: #ff7a00; background: rgba(255,122,0,0.1); }
+.nota { color: #999; font-size: 13px; }
+.galeria { margin: 35px auto 20px; max-width: 700px; padding: 20px; border: 2px solid #ff7a00; border-radius: 18px; background: rgba(20,20,30,0.8); }
+.imagenes { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.imagenes img { width: 250px; max-width: 100%; height: 180px; object-fit: cover; border: 2px solid #8a5cff; border-radius: 12px; }
+.imagenes p { color: #8a5cff; font-weight: bold; }
+</style>
+</head>
+<body>
+<div id="puntero-verde"></div>
+<h1>🤖 Robot Centinela</h1>
+<p class="subtitulo">Robots con sensores de proximidad</p>
+<div class="contenedor">
+    <section class="tarjeta">
+        <h2>Robot Centinela Negro</h2>
+        <div class="robot">
+            <div class="bola-antena"></div><div class="antena"></div>
+            <div class="cabeza"><div class="ojos"><div class="ojo"></div><div class="ojo"></div></div><div class="boca"></div></div>
+            <div class="brazos"><div class="brazo"></div><div class="brazo"></div></div>
+            <div class="cuerpo"><div class="panel"></div></div>
+            <div class="piernas"><div class="pierna"></div><div class="pierna"></div></div>
+        </div>
+        <div class="sensor"><p>Distancia: <span id="distancia1">--</span> cm</p><p class="estado" id="estado1">Esperando lectura...</p></div>
+        <button onclick="simular(1)">Activar sensor</button>
+    </section>
+    <section class="tarjeta" style="border-color: #a855f7;">
+        <h2 style="color:#a855f7;">Robot Centinela Morado</h2>
+        <div class="robot robot-morado">
+            <div class="bola-antena"></div><div class="antena"></div>
+            <div class="cabeza"><div class="ojos"><div class="ojo"></div><div class="ojo"></div></div><div class="boca"></div></div>
+            <div class="brazos"><div class="brazo"></div><div class="brazo"></div></div>
+            <div class="cuerpo"><div class="panel"></div></div>
+            <div class="piernas"><div class="pierna"></div><div class="pierna"></div></div>
+        </div>
+        <div class="sensor" style="border-color: rgba(168,85,247,0.4);"><p>Distancia: <span id="distancia2">--</span> cm</p><p class="estado" id="estado2" style="color:#a855f7;">Esperando lectura...</p></div>
+        <button onclick="simular(2)" style="background: linear-gradient(135deg, #a855f7, #6d28d9); box-shadow: 0 0 10px rgba(168,85,247,0.5);">Activar sensor</button>
+    </section>
+</div>
+<div class="lista-enlaces">
+    <h2>🌐 Mis enlaces favoritos</h2>
+    <a href="https://www.youtube.com/results?search_query=el+cadaver+de+la+novia+trailer+oficial" target="_blank" rel="noopener noreferrer">💀 Tráiler de El Cadáver de la Novia</a>
+    <a href="https://www.youtube.com/results?search_query=Ravelay+Esta+Cantina" target="_blank" rel="noopener noreferrer">🎵 Esta Cantina - Rawayana</a>
+    <a href="https://www.crazygames.com/game/papas-pizzeria" target="_blank" rel="noopener noreferrer">🍕 Papa's Pizzeria</a>
+    <a href="https://www.youtube.com/results?search_query=Ravelay+Casanova" target="_blank" rel="noopener noreferrer">🎧 Casanova - Rawayana</a>
+    <a href="https://www.fortnite.com/" target="_blank" rel="noopener noreferrer">⛏️ Videojuego Fortnite</a>
+    <a href="https://www.youtube.com/results?search_query=Coraline+trailer+oficial" target="_blank" rel="noopener noreferrer">🎬 Tráiler de Coraline</a>
+    <a href="https://youtu.be/DmQjyDL2WP4?si=QK5SXru5MS12RKq0" target="_blank" rel="noopener noreferrer">▶️ Video libre</a>
+    <a href="http://0.0.0.0:8080/Aguacate.php" target="_blank" rel="noopener noreferrer">🥑 Aguacate</a>
+</div>
+<p class="nota">Proyecto escolar: simulación de robots y sensores de proximidad.</p>
+<section class="galeria"><h2>📸 Galería de imágenes</h2><div class="imagenes"><div><img src="robot1.jpg" alt="Primera imagen del robot"><p>Robot 1</p></div><div><img src="robot2.jpg" alt="Segunda imagen del robot"><p>Robot 2</p></div></div></section>
+<script>
+function simular(numero) {
+    const distancia = Math.floor(Math.random() * 100) + 1;
+    document.getElementById("distancia" + numero).textContent = distancia;
+    const estado = document.getElementById("estado" + numero);
+    if (distancia <= 20) { estado.textContent = "⚠️ ¡Objeto muy cerca!"; estado.style.color = "#ff4444"; }
+    else if (distancia <= 50) { estado.textContent = "🟡 Objeto aproximándose"; estado.style.color = "#ffcc33"; }
+    else { estado.textContent = "✅ Zona segura"; estado.style.color = numero === 1? "#ff7a00" : "#a855f7"; }
+}
+const puntero = document.getElementById("puntero-verde");
+function moverPuntero(x, y) { puntero.style.left = x + "px"; puntero.style.top = y + "px"; }
+document.addEventListener("pointermove", e => moverPuntero(e.clientX, e.clientY));
+document.addEventListener("touchmove", e => { if(e.touches.length>0) moverPuntero(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+</script>
+</body>
+</html>

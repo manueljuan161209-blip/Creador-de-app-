@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Libreta de Despedida</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  text-align:center;
+  color:#fff;
+  background: #050510;
+  background-image: radial-gradient(circle at 20% 20%, #220033 0%, transparent 40%),
+                    radial-gradient(circle at 80% 80%, #003333 0%, transparent 40%);
+  background-attachment: fixed;
+  min-height:100vh;
+  padding: 20px 10px 40px 10px;
+}
+.card{
+  background: rgba(0,0,0,0.6);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 25px;
+  border-radius: 20px;
+  border: 3px solid #00FFFF;
+  box-shadow: 0 0 10px #00FFFF, 0 0 25px #00FFFF, 0 0 50px #FF00FF, inset 0 0 15px #00FFFF;
+  text-align: left;
+}
+h1{
+  text-align:center;
+  color:#00FFFF;
+  font-size: 26px;
+  text-shadow: 0 0 5px #00FFFF, 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+  margin: 0;
+}
+h2{
+  text-align:center;
+  color:#FF00FF;
+  font-size: 16px;
+  text-shadow: 0 0 5px #FF00FF, 0 0 15px #FF00FF;
+  margin: 5px 0 15px 0;
+}
+.instruccion{
+  text-align:center;
+  background: rgba(255,255,255,0.08);
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #FFFF00;
+  color: #FFFF00;
+  text-shadow: 0 0 5px #FFFF00;
+  font-size: 14px;
+}
+label{
+  display:block;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color:#39FF14;
+  text-shadow: 0 0 5px #39FF14;
+  font-size: 16px;
+}
+input, textarea{
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid #00FFFF;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+  font-family: Arial;
+  outline: none;
+  box-shadow: 0 0 8px #00FFFF33;
+}
+input:focus, textarea:focus{
+  border-color: #FF00FF;
+  box-shadow: 0 0 15px #FF00FF;
+}
+textarea{ resize: vertical; min-height: 70px; }
+.fila{
+  display:flex;
+  gap:10px;
+}
+.fila > div{ flex:1; }
+.firma{
+  text-align:center;
+  margin-top: 25px;
+}
+.firma input{
+  text-align:center;
+  font-family: cursive;
+  font-size: 18px;
+  color:#FFFF00;
+  border: none;
+  border-bottom: 2px solid #FFFF00;
+  border-radius: 0;
+  background: transparent;
+}
+button{
+  display:block;
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #050510;
+  background: #00FFFF;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF;
+}
+button:hover{
+  background: #FF00FF;
+  box-shadow: 0 0 15px #FF00FF, 0 0 30px #FF00FF;
+  color: white;
+}
+#respuesta{
+  display:none;
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #39FF14;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #39FF14;
+  white-space: pre-wrap;
+  text-align: left;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>📔 LIBRETA DE DESPEDIDA — ¡HASTA SIEMPRE! 👋</h1>
+  <h2>Formulario de Recuerdos del Grupo</h2>
+  <div class="instruccion">Completa con tus datos y un mensaje sincero.<br>Cuando todos terminen, tendremos un hermoso recuerdo 💛</div>
+
+  <form id="formLibreta">
+    <label>1️⃣ Nombre completo:</label>
+    <input type="text" id="nombre" value="Juan Manuel Angulo Perez" placeholder="Escribe tu nombre">
+
+    <div class="fila">
+      <div>
+        <label>2️⃣ Grado y grupo:</label>
+        <input type="text" id="grupo" value="5D" placeholder="Ej. 5D">
+      </div>
+      <div>
+        <label>Fecha:</label>
+        <input type="text" id="fecha" value="20 / Nov / 2026" placeholder="Fecha">
+      </div>
+    </div>
+
+    <label>3️⃣ Mi recuerdo favorito del grupo:</label>
+    <textarea id="recuerdo" placeholder="Escribe tu recuerdo favorito..."></textarea>
+
+    <label>4️⃣ Un mensaje para mis compañeros:</label>
+    <textarea id="mensaje" placeholder="Escribe tu mensaje..."></textarea>
+
+    <label>5️⃣ Algo que aprendí con este grupo:</label>
+    <textarea id="aprendio" placeholder="¿Qué aprendiste?"></textarea>
+
+    <label>6️⃣ Mis mejores deseos para el futuro de todos:</label>
+    <textarea id="deseos" placeholder="Escribe tus deseos..."></textarea>
+
+    <label>7️⃣ Mi frase para recordar:</label>
+    <input type="text" id="frase" placeholder="Tu frase...">
+
+    <div class="firma">
+      <label style="text-align:center;">Firma:</label>
+      <input type="text" id="firma" placeholder="Firma aquí">
+    </div>
+
+    <button type="button" onclick="guardar()">💾 GUARDAR MI RECUERDO</button>
+  </form>
+
+  <div id="respuesta"></div>
+</div>
+
+<script>
+function guardar(){
+  let nombre = document.getElementById('nombre').value;
+  let grupo = document.getElementById('grupo').value;
+  let fecha = document.getElementById('fecha').value;
+  let recuerdo = document.getElementById('recuerdo').value;
+  let mensaje = document.getElementById('mensaje').value;
+  let aprendio = document.getElementById('aprendio').value;
+  let deseos = document.getElementById('deseos').value;
+  let frase = document.getElementById('frase').value;
+  let firma = document.getElementById('firma').value;
+
+  let texto = "📔 LIBRETA DE DESPEDIDA - GUARDADA 💛\n\n" +
+  "1️⃣ Nombre: " + nombre + "\n" +
+  "2️⃣ Grupo: " + grupo + " | Fecha: " + fecha + "\n\n" +
+  "3️⃣ Mi recuerdo favorito:\n" + recuerdo + "\n\n" +
+  "4️⃣ Mensaje para mis compañeros:\n" + mensaje + "\n\n" +
+  "5️⃣ Algo que aprendí:\n" + aprendio + "\n\n" +
+  "6️⃣ Mis mejores deseos:\n" + deseos + "\n\n" +
+  "7️⃣ Mi frase: " + frase + "\n\n" +
+  "Firma: " + firma + " ✍️";
+
+  let div = document.getElementById('respuesta');
+  div.style.display = 'block';
+  div.innerText = texto;
+  alert("¡Listo! Tu recuerdo quedó guardado abajo 💛");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de un Robot</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #080b20, #25204b, #101827);
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 35px 15px;
+            background: #101027;
+            border-bottom: 3px solid #8b5cf6;
+        }
+
+        h1 {
+            color: #a5b4fc;
+            font-size: 38px;
+            text-shadow: 0 0 15px #8b5cf6;
+        }
+
+        h2 {
+            color: #c4b5fd;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
+            box-shadow: 0 0 15px #0005;
+        }
+
+        .robot {
+            font-size: 120px;
+            margin: 15px;
+            animation: flotar 2s infinite ease-in-out;
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .materiales {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .tarjeta {
+            background: #242348;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #6554a4;
+        }
+
+        .tarjeta span {
+            font-size: 35px;
+        }
+
+        ul, ol {
+            display: inline-block;
+            text-align: left;
+            line-height: 2;
+        }
+
+        .boton {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 16px 25px;
+            color: white;
+            background: #6d28d9;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background: #a855f7;
+            transform: scale(1.05);
+        }
+
+        /* Imagen de la película */
+        .imagen-pelicula {
+            width: 250px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 0 20px #8b5cf6;
+            transition: transform 0.3s;
+        }
+
+        .imagen-pelicula:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 25px;
+            background: #090919;
+            color: #c4b5fd;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🤖 Creación de un Robot</h1>
+    <p>Descubre sus partes, materiales y cómo construirlo paso a paso.</p>
+</header>
+
+<section>
+    <h2>¿Cómo será nuestro robot?</h2>
+    <div class="robot">🤖</div>
+    <p>
+        Nuestro robot será una máquina diseñada para realizar
+        tareas sencillas. Tendrá una estructura resistente,
+        sensores para detectar su entorno y un sistema electrónico
+        que le permitirá funcionar.
+    </p>
+</section>
+
+<section>
+    <h2>🧰 Materiales y componentes</h2>
+
+    <div class="materiales">
+        <div class="tarjeta">
+            <span>🦾</span>
+            <h3>Estructura</h3>
+            <p>Cartón resistente, plástico o piezas de acrílico
+            para formar el cuerpo.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>⚡</span>
+            <h3>Alimentación</h3>
+            <p>Pilas o una batería compatible con los componentes
+            electrónicos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>🔌</span>
+            <h3>Cables</h3>
+            <p>Cables y conectores para unir los circuitos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>🧠</span>
+            <h3>Controlador</h3>
+            <p>Una placa Arduino o microcontrolador para controlar
+            las funciones del robot.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>⚙️</span>
+            <h3>Motores</h3>
+            <p>Motores adecuados para mover ruedas, brazos
+            u otras piezas.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>👁️</span>
+            <h3>Sensores</h3>
+            <p>Sensores de distancia para detectar obstáculos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>💡</span>
+            <h3>Luces LED</h3>
+            <p>Luces para indicar cuándo está encendido
+            o funcionando.</p>
+        </div>
+
+        <div class="tarjeta">
+            <span>🛠️</span>
+            <h3>Herramientas</h3>
+            <p>Destornillador, cinta, regla y herramientas
+            adecuadas para montar las piezas.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>🔨 Pasos para construir el robot</h2>
+
+    <ol>
+        <li>Diseñar un dibujo del robot y planificar sus funciones.</li>
+        <li>Construir la estructura del cuerpo, la cabeza y las extremidades.</li>
+        <li>Colocar los motores y las ruedas, si tendrá movimiento.</li>
+        <li>Instalar el controlador y los sensores.</li>
+        <li>Conectar los cables y la alimentación correctamente.</li>
+        <li>Programar el controlador para realizar las tareas.</li>
+        <li>Probar los movimientos y corregir los errores.</li>
+        <li>Decorar el robot y comprobar que funcione de forma segura.</li>
+    </ol>
+</section>
+
+<section>
+    <h2>⚙️ ¿Cómo funciona?</h2>
+    <p>
+        El controlador recibe información de los sensores,
+        ejecuta las instrucciones del programa y envía señales
+        a los motores o a las luces. La fuente de alimentación
+        proporciona la energía necesaria para que el sistema funcione.
+    </p>
+</section>
+
+<section>
+    <h2>🎬 ¡Hora de ver una película!</h2>
+
+    <p>
+        Después de terminar nuestro proyecto de robótica,
+        disfruta de una aventura con una estética misteriosa
+        y fantástica.
+    </p>
+
+    <h3>💀 El cadáver de la novia 💙</h3>
+
+    <!-- Imagen de El cadáver de la novia -->
+    <img
+        src="Cadáver de la novia.jpg"
+        alt="Imagen de El cadáver de la novia"
+        class="imagen-pelicula"
+        loading="lazy"
+    >
+
+    <p>
+        Una historia fantástica llena de misterio,
+        música y personajes inolvidables.
+    </p>
+
+    <a
+        class="boton"
+        <a href="https://www.youtube.com/watch?v=L-dSSOsyORc&list=PLGm28UJgwESMPtiEEfwhdJEAQtTPCC846"
+        target="_blank"
+        rel="noopener noreferrer">
+        ▶ Ver en YouTube
+    </a>
+</section>
+
+<footer>
+    <p>🤖 Proyecto escolar: Creación de un robot</p>
+    <p>La imaginación convierte las ideas en inventos.</p>
+</footer>
+
+</body>
+</html>
